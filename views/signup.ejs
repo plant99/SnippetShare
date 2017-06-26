@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Sign Up</title>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+	<style type="text/css">
+		body{
+			margin:30px auto;
+			text-align: center ;
+			background-color: cyan ;
+		}
+		form{
+			margin-top: 30px ;
+			padding: 30px ;
+		}
+		input, select{
+			margin:20px;
+		}
+		.jumbotron h1{
+			font-size: 26px ;
+		}
+
+		.notification{
+			border-radius: 10px ;
+			padding:20px ;
+			background-color: yellow ;
+			color: red ;
+			font-size: 20px ;
+		}
+		p.notInTheForm{
+			color: red ;
+		}
+		.btn{
+			text-decoration: none ;
+		}
+	</style>
+</head>
+<body>
+	<%if(message){%>
+
+	<div class="notificationBox"><p class="notification"><%=message%></p></div>
+	<%}%>
+	<h1>SignUp to use NoticeBoard</h1>
+	<form method="post" action="/signup" onsubmit="return validateForm();">
+		<p style="color:red;">*Every field is compulsory</p>
+		<label>Username:<input type="text" name="username"></label>
+		<br>
+		<label>Password:<input type="password" name="password"></label>
+		<br>
+		<!--
+		<label>What are you?
+			<select name="type">
+			<option value="teacher">TEACHER</option>
+			<option value="student">STUDENT</option>
+		</select>
+		</label>
+		 -->
+		<br>
+		<p>Type the numbers shown in the picture, in the box below<br>(Don't use spaces)</p>
+		<img src="data:image/jpeg;base64,<%= valicode %>"/> <br>
+		
+		<input type="text" name="captchaResponse"><br>
+		<input type="submit" value="Submit">
+	</form>
+	<p class="notInTheForm">Existing users might want to <a href="/login" class="btn">LOGIN</a></p>
+	<script type="text/javascript" src="javascripts/jquery.min.js"></script>
+	<script type="text/javascript">
+		function validateForm(){
+			if( (document.forms[0]['username'].value != "") && (document.forms[0]['password'].value) && (document.forms[0]['captchaResponse'].value) )
+				return true ;
+			else{
+				return false ;
+			}
+		}
+		function notify(text){
+			var p = document.createElement('p') ;
+			p.innerHTML = text ;
+			p.setAttribute('class', 'notification') ;
+			console.log(p)
+			document.querySelector('.notificationBox').appendChild(p) ;
+		}
+		setTimeout(function(){
+			$('.notificationBox').remove()
+		}, 5000)
+	</script>
+</body>
+</html>

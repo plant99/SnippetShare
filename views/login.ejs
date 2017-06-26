@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Login</title>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+	<style type="text/css">
+		body{
+			margin:30px auto;
+			text-align: center ;
+			background-color: cyan ;
+		}
+		form{
+			margin-top: 30px ;
+			padding: 30px ;
+		}
+		input, select{
+			margin:20px;
+		}
+		.notification{
+			border-radius: 10px ;
+			padding:20px ;
+			background-color: yellow ;
+			color: red ;
+			font-size: 20px ;
+		}p{
+			color: red ;
+		}
+		.btn{
+			text-decoration: none ;
+		}
+	</style>
+</head>
+<body>
+	<div class="notificationBox"></div>
+	<h1>Login</h1>
+	<label>Username:<input type="text" name="username" class="username"></label>
+	<br>
+	<label>Password:<input type="password" name="password" class="password"></label>
+	<br>
+	<input type="submit" value="Submit" id="submit">
+
+	<p>New users might want to <a href="/signup" class="btn">SIGNUP</a></p>
+	
+
+	<script type="text/javascript" src="javascripts/jquery.min.js"></script>
+	<script type="text/javascript" src="javascripts/jqueryCookie.js"></script>
+	<script type="text/javascript">
+		$('#submit').click(function(){
+			if(($('.username').val()!="") && ($('.password').val()!="")){
+				$.post('/login', { username: $('.username').val(), password : $('.password').val()}, 
+			    function(returnedData){
+			         if(returnedData.token || returnedData.token!=undefined){
+			         	$.cookie('token',returnedData.token, {expires: 1}, {domain: 'localhost:3000'})
+			         	console.log(returnedData)
+						location.href  = "/board"
+			         }else{
+			         	notify(returnedData.message)
+			         	setTimeout(function(){
+			         		$('.notification').remove()
+			         	}, 4000)
+			         }
+				});
+			}
+		})
+
+		function notify(text){
+			var p = document.createElement('p') ;
+			p.innerHTML = text ;
+			p.setAttribute('class', 'notification') ;
+			console.log(p)
+			document.querySelector('.notificationBox').appendChild(p) ;
+		}
+	</script>
+</body>
+</html>

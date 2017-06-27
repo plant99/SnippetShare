@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Snippet</title>
+	<link rel="stylesheet" href="/css/highlightStyles/default.css">
+	<script src="/javascripts/highlight.pack.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+	<style type="text/css">
+		body{
+			margin:30px auto;
+			text-align: center ;
+			background-color: cyan ;
+		}
+		form{
+			margin-top: 30px ;
+			padding: 30px ;
+		}
+		input, select{
+			margin:20px;
+		}
+		.notification{
+			border-radius: 10px ;
+			padding:20px ;
+			background-color: yellow ;
+			color: red ;
+			font-size: 20px ;
+		}p{
+			color: red ;
+		}
+		.btn{
+			text-decoration: none ;
+		}
+		.tArea{
+			resize: none ;
+			border:none;
+			border-radius: 20px ;
+			width: 80% ;
+			height: 500px ;
+		}
+		.tArea:active{
+
+			resize: none ;
+			border:none;
+			border-radius: 20px ;
+			width: 80% ;
+			height: 500px ;
+		}
+		.content{
+			width: 800px;
+			height: 700px; 
+			padding: 20px;
+			border:none;
+			border-radius: 10px ;
+
+			text-align: left;
+			background-color: white ;
+			margin-left: 17%;
+		}
+	</style>
+</head>
+<body>
+	<%if(message){%>
+	<p id="message"><%=message%></p>
+	<%}%>
+	<div class="board">
+		<div class="header"><h1><%= snippet.header %></h1></div>
+		<pre class="content"><code  class="js"><%=snippet.content%></code></pre>
+	</div>
+	<script type="text/javascript">
+		setTimeout(function(){
+			var message = document.getElementById('message')
+			if(message){
+				message.remove() ;
+			}
+		},10000)
+	</script>
+</body>
+</html>

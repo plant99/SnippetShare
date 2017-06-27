@@ -12,10 +12,11 @@ module.exports = function(req,res,next){
 				res.render('error', {
 					message: 'Login wasn\'t a success, try again'
 				})
+			}else{	
+				req.decoded = decoded ;
+				console.log(decoded)
+				next() ;
 			}
-			req.decoded = decoded ;
-			console.log(decoded)
-			next() ;
 		})
 	}else{
 		res.redirect('/login')

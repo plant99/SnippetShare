@@ -1,9 +1,10 @@
 var mongoose = require('mongoose') ;
 var Schema = mongoose.Schema ;
 
-module.exports = mongoose.model('notice', new Schema({
+module.exports = mongoose.model('code', new Schema({
 	header:String,
 	content: String,
 	type: String,
-	owner: String
+	owner: String,
+	url: String
 }))

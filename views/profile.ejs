@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>User</title>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+	<style type="text/css">
+		body{
+			margin:30px auto;
+			text-align: center ;
+			background-color: cyan ;
+		}
+		form{
+			margin-top: 30px ;
+			padding: 30px ;
+		}
+		input, select{
+			margin:20px;
+		}
+		.notification{
+			border-radius: 10px ;
+			padding:20px ;
+			background-color: yellow ;
+			color: red ;
+			font-size: 20px ;
+		}p{
+			color: red ;
+		}
+		.btn{
+			text-decoration: none ;
+		}
+		.tArea{
+			resize: none ;
+			border:none;
+			border-radius: 20px ;
+			width: 80% ;
+			height: 500px ;
+		}
+		.tArea:active{
+
+			resize: none ;
+			border:none;
+			border-radius: 20px ;
+			width: 80% ;
+			height: 500px ;
+		}
+	</style>
+</head>
+<body>
+	<div class="board">
+		<div class="header"><h1><%= user.username %></h1></div>
+		<div class="content">
+			<ul>
+				<%for(var i=0;i<codes.length; i++){%>
+					<li><a href="/view_snippet/<%=codes[i].url%>"><%= codes[i].header%></a></li>
+				<%}%>
+			</ul>
+		</div>
+	</div>
+</body>
+</html>

@@ -52,7 +52,8 @@ function saveCode(checkedUrl, req, res){
 		content: req.body.content,
 		type: req.body.type,
 		owner: req.decoded._doc.username,
-		url:checkedUrl
+		url:checkedUrl,
+		language: req.body.language
 	})
 
 	code.save(function(err, codeSaved){

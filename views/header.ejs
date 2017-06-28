@@ -1,0 +1,46 @@
+<ul class="navigationList">
+	<li class="navItem"><a href="/add_new">ADD-SNIPPET</a></li>
+	<li class="navItem"><a href="/add_new/file">UPLOAD-FILE</a></li>
+	<li class="navItem"><a href="/profile">PROFILE</a></li>
+	<li class="logout"><a href="#">LOGOUT</a></li>
+	<li class="signup"><a href="#">SIGNUP</a></li>
+</ul>
+<div class="dummy"></div>
+<style type="text/css">
+	.navigationList{
+		list-style-type: none ;
+	}
+	.navigationList li a{
+		padding: 10px;
+		float: left ;
+		width: 15% ;
+		margin-left: 4% ;
+		background-color: yellow ;
+		color: red; 
+		text-decoration: none ;
+	}
+	.navigationList li a:hover{
+		color: cyan ;
+		transition-duration: 0.5s ;
+		cursor: pointer; 
+	}
+	.dummy{
+		clear: both; 
+	}
+</style>
+<script type="text/javascript" src="/javascripts/jscookie.js"></script>
+<script defer type="text/javascript">
+	var logout = document.querySelector('.logout') ;
+	logout.onclick = function(){
+
+		Cookies.remove('token', {expires: 1}, {domain: 'localhost:3000'});
+		location.href='/login' ;
+	}
+	var signup = document.querySelector('.signup')
+	signup.onclick = function(){
+
+		Cookies.remove('token', {expires: 1}, {domain: 'localhost:3000'});
+		location.href='/signup' ;
+	}
+
+</script>

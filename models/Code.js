@@ -8,5 +8,6 @@ module.exports = mongoose.model('code', new Schema({
 	owner: String,
 	url: String,
 	language: String,
-	expiresAt: Number
+	expiresAt: Number,
+	anonimity: Boolean
 }))

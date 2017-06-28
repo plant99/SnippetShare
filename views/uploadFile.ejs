@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>New</title>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+	<style type="text/css">
+		body{
+			margin:30px auto;
+			text-align: center ;
+			background-color: cyan ;
+		}
+		form{
+			margin-top: 30px ;
+			padding: 30px ;
+		}
+		input, select{
+			margin:20px;
+		}
+		.notification{
+			border-radius: 10px ;
+			padding:20px ;
+			background-color: yellow ;
+			color: red ;
+			font-size: 20px ;
+		}p{
+			color: red ;
+		}
+		.btn{
+			text-decoration: none ;
+		}
+		.tArea{
+			resize: none ;
+			border:none;
+			border-radius: 20px ;
+			width: 80% ;
+			height: 500px ;
+			padding: 20px;
+		}
+		.tArea:active{
+
+			resize: none ;
+			border:none;
+			border-radius: 20px ;
+			width: 80% ;
+			height: 500px ;
+		}
+	</style>
+</head>
+<body>
+	<div class="board">
+	<%if(message){%>
+	<p id="message"><%=message%></p>
+	<%}%>
+		<form action="/add_new/file" method="post" enctype="multipart/form-data">
+			<div class="title">UPLOAD NEW</div>
+
+			<p>Select type of snippet</p>
+			<select class="select" name="type">
+				<option value="public">Public</option>
+				<option value="private">Private</option>
+			</select>
+			<p>Choose the language</p>
+			<select class="select" name="language">
+				<option value="js">JavaScript</option>
+				<option value="java">Java</option>
+				<option value="sh">Bash</option>
+				<option value="html">HTML</option>
+				<option value="cs">C#</option>
+				<option value="cpp">C++/C</option>
+				<option value="css">CSS</option>
+				<option value="coffeescript">CoffeeScript</option>
+				<option value="d">D</option>
+				<option value="go">Go</option>
+				<option value="json">JSON</option>
+				<option value="md">Markdown</option>
+				<option value="objc">ObjectiveC</option>
+				<option value="php6">PHP</option>
+				<option value="python">Python</option>
+				<option value="ruby">Ruby</option>
+				<option value="sql">SQL</option>
+				<option value="swift">Swift</option>
+				<option value="typescript">TypeScript</option>
+			</select>
+			<p>A small description of the code</p>
+			<input type="text" name="header" required="true">
+			<p>Paste the code content here:</p>
+			<input type="file" name="content">
+			<br>
+			<input type="submit" name="submit" value="submit">
+		</form>
+	</div>
+	<script type="text/javascript">
+		setTimeout(function(){
+			var message = document.getElementById('message')
+			if(message){
+				message.remove() ;
+			}
+		},10000)
+	</script>
+</body>
+</html>

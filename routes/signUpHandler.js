@@ -36,6 +36,19 @@ router.post('/',function(req,res,next){
 	}
 	
 })
+router.post('/check_availability', function(req, res, next){
+	User.findOne({username: req.body.username}, function(err, user){
+		if(err){
+			res.render('error',{message:'Couldn\'t save, try again'})
+		}else{
+			if(user){
+				res.json({canUse: false})
+			}else{
+				res.json({canUse: true})
+			}
+		}
+	})
+})
 
 router.get('/',function(req, res, next){
 

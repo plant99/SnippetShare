@@ -44,7 +44,7 @@
 	<h1>SignUp to use NoticeBoard</h1>
 	<form method="post" action="/signup" onsubmit="return validateForm();">
 		<p style="color:red;">*Every field is compulsory</p>
-		<label>Username:<input type="text" name="username"></label>
+		<label>Username:<input type="text" name="username" class="username"> <span class="uNameVerifiedContainer"><img class="uNameVerified" src=""></span></label>
 		<br>
 		<label>Password:<input type="password" name="password"></label>
 		<br>
@@ -80,9 +80,22 @@
 			console.log(p)
 			document.querySelector('.notificationBox').appendChild(p) ;
 		}
+
 		setTimeout(function(){
 			$('.notificationBox').remove()
 		}, 5000)
+
+		document.forms[0]['username'].onchange = function(){
+			$.post('/signup/check_availability',{username: $('.username').val()}, function(response){
+				if(response.canUse){
+					document.querySelector('.uNameVerified').src = 'images/glyphicons/png/glyphicons-153-check.png'
+					document.forms[0]['username'].style.border = '2px solid green'
+				}else{
+					document.querySelector('.uNameVerified').src = 'images/glyphicons/png/glyphicons-208-remove.png'
+					document.forms[0]['username'].style.border = '2px solid red'
+				}
+			})
+		}
 	</script>
 </body>
 </html>

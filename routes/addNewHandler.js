@@ -71,13 +71,15 @@ function randomNumber(){
 	return code ;
 }
 function saveCode(checkedUrl, req, res){
+	var date = new Date()
 	var code = new Code({
 		header: req.body.header,
 		content: req.body.content,
 		type: req.body.type,
 		owner: req.decoded._doc.username,
 		url:checkedUrl,
-		language: req.body.language
+		language: req.body.language,
+		expiresAt: Number(date.getTime()) + Number(req.body.expiresAt)* 86400000
 	})
 
 	code.save(function(err, codeSaved){
@@ -93,13 +95,15 @@ function saveCode(checkedUrl, req, res){
 }
 
 function saveCode1(checkedUrl, req, res){
+	var date = new Date()
 	var code = new Code({
 		header: req.body.header,
 		content: req.files.content.data.toString(),
 		type: req.body.type,
 		owner: req.decoded._doc.username,
 		url:checkedUrl,
-		language: req.body.language
+		language: req.body.language,
+		expiresAt: Number(date.getTime()) + Number(req.body.expiresAt)* 86400000
 	})
 
 	code.save(function(err, codeSaved){

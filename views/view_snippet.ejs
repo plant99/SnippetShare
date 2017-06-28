@@ -69,6 +69,13 @@
 	<div class="board">
 		<div class="header"><h1><%= snippet.header %></h1></div>
 		<pre class="content"><code  class="<%=snippet.language%>"><%=snippet.content%></code></pre>
+		<%if(snippet.anonimity){%>
+		<footer class="credits">
+			<p><em>Uploaded By:-</em></p>
+			<code><%=snippet.owner%></code>
+		</footer>
+		<%}%>
+
 	</div>
 	<script type="text/javascript">
 		setTimeout(function(){

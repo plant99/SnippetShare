@@ -4,6 +4,9 @@ var router = express.Router()
 router.get('/',function(req, res, next){
 	res.render('add_new',{message:''})
 })
+router.get('/file',function(req, res, next){
+	res.render('uploadFile',{message:''})
+})
 
 router.post('/',function(req, res, next){
 	var checkedUrl,uncheckedUrl = randomNumberComplete() ;
@@ -23,6 +26,27 @@ router.post('/',function(req, res, next){
 			}
 		}else{
 			saveCode(uncheckedUrl,  req, res)
+		}
+	})
+})
+router.post('/file',function(req, res, next){
+	var checkedUrl,uncheckedUrl = randomNumberComplete() ;
+
+	Code.findOne({url: uncheckedUrl},function(err, codeCheck){
+		if(codeCheck){
+			if(codeCheck.url[6]){
+				var index = Number(codeCheck.url[6]) ;
+				index++ ;
+				checkedUrl = codeCheck.url.slice(0,5) + index ;
+				saveCode1(checkedUrl, req, res)
+
+			}else{
+				checkedUrl = codeCheck.url ;
+				checkedUrl.push('0')
+				saveCode1(checkedUrl, req, res)
+			}
+		}else{
+			saveCode1(uncheckedUrl,  req, res)
 		}
 	})
 })
@@ -67,3 +91,26 @@ function saveCode(checkedUrl, req, res){
 		})
 	})
 }
+
+function saveCode1(checkedUrl, req, res){
+	var code = new Code({
+		header: req.body.header,
+		content: req.files.content.data.toString(),
+		type: req.body.type,
+		owner: req.decoded._doc.username,
+		url:checkedUrl,
+		language: req.body.language
+	})
+
+	code.save(function(err, codeSaved){
+		User.findOne({username: code.owner}, function(err, user){
+			user.codes.push(code.header)
+			user.save(function(err, headerSaved){
+				console.log(codeSaved, headerSaved) ;
+				var message  = 'Your code was successfully saved and live at /'+codeSaved.url ;
+				res.render('add_new', {message: message})
+			})
+		})
+	})
+}
+//

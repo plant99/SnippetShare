@@ -79,7 +79,8 @@ function saveCode(checkedUrl, req, res){
 		owner: req.decoded._doc.username,
 		url:checkedUrl,
 		language: req.body.language,
-		expiresAt: Number(date.getTime()) + Number(req.body.expiresAt)* 86400000
+		expiresAt: Number(date.getTime()) + Number(req.body.expiresAt)* 86400000,
+		anonimity: Boolean(Number(req.body.anonimity))
 	})
 
 	code.save(function(err, codeSaved){
@@ -103,7 +104,8 @@ function saveCode1(checkedUrl, req, res){
 		owner: req.decoded._doc.username,
 		url:checkedUrl,
 		language: req.body.language,
-		expiresAt: Number(date.getTime()) + Number(req.body.expiresAt)* 86400000
+		expiresAt: Number(date.getTime()) + Number(req.body.expiresAt)* 86400000,
+		anonimity: Boolean(Number(req.body.anonimity))
 	})
 
 	code.save(function(err, codeSaved){

@@ -20,6 +20,7 @@ var signUpHandler = require('./routes/signUpHandler.js')
 var addNewHandler = require('./routes/addNewHandler')
 var viewSnippet  = require('./routes/view_snippet')
 var profile = require('./routes/profile')
+var postExpiryHandler = require('./routes/postExpiryHandler')
 
 //require middlewares
 
@@ -42,6 +43,7 @@ app.use(express.static(path.join(__dirname, 'public')))
 //Routes
 app.use('/login',loginHandler)
 app.use('/signup',signUpHandler)
+app.use(postExpiryHandler)
 app.use('/view_snippet', viewSnippet)
 app.use(authenticate)
 app.use('/view_snippet/:id',function(req, res, next){

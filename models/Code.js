@@ -7,5 +7,6 @@ module.exports = mongoose.model('code', new Schema({
 	type: String,
 	owner: String,
 	url: String,
-	language: String
+	language: String,
+	expiresAt: Number
 }))

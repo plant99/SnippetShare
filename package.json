@@ -1,7 +1,7 @@
 {
-  "name": "noticeboard",
+  "name": "SnippetShare",
   "version": "1.0.0",
-  "description": "An online noticeboard app for academic usage",
+  "description": "An online platform to share code-snippet",
   "main": "app.js",
   "scripts": {
     "test": "nodejs app.js"
